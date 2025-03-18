@@ -1,7 +1,10 @@
+import { Suspense } from "react";
 import type { Metadata, Viewport } from "next";
 import { Roboto } from "next/font/google";
+import { LoadingSpinner, Providers } from "@/components";
 
 import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/sonner";
 
 import "./globals.css";
 
@@ -54,7 +57,20 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="TicketHub" />
         <link rel="manifest" href="/favicon/site.webmanifest" />
       </head>
-      <body className={cn(roboto.className, "antialiased")}>{children}</body>
+      <body className={cn(roboto.className, "antialiased")}>
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center h-screen">
+              <LoadingSpinner variant="bars" />
+            </div>
+          }
+        >
+          <main className="flex flex-col relative">
+            <Providers>{children}</Providers>
+            <Toaster richColors />
+          </main>
+        </Suspense>
+      </body>
     </html>
   );
 }
