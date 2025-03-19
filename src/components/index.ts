@@ -4,6 +4,7 @@ import Icons from "./global/icons";
 import { LoadingSpinner } from "./global/loading-spinner";
 import MaxWidthWrapper from "./global/max-width-wrapper";
 import { Providers } from "./global/providers";
+import Navbar from "./navbar";
 
 export {
   AnimationContainer,
@@ -11,5 +12,6 @@ export {
   Icons,
   LoadingSpinner,
   MaxWidthWrapper,
+  Navbar,
   Providers,
 };

@@ -10,7 +10,7 @@ const NotFound = () => {
           <span className="not-found rounded-md bg-gradient-to-br from-green-400 to-lime-400 px-3.5 py-1 text-sm font-medium text-neutral-800">
             404
           </span>
-          <h1 className="mt-5 text-3xl font-bold text-neutral-50 md:text-5xl">
+          <h1 className="mt-5 text-3xl font-bold text-neutral-950 md:text-5xl">
             Not Found
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-center text-base font-medium text-neutral-400">
