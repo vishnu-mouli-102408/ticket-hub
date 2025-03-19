@@ -8,6 +8,9 @@ import { Toaster } from "@/components/ui/sonner";
 
 import "./globals.css";
 
+import { ClerkLoaded, ClerkLoading, ClerkProvider } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
+
 const roboto = Roboto({
   subsets: ["latin"],
   variable: "--font-roboto",
@@ -58,18 +61,39 @@ export default function RootLayout({
         <link rel="manifest" href="/favicon/site.webmanifest" />
       </head>
       <body className={cn(roboto.className, "antialiased")}>
-        <Suspense
-          fallback={
-            <div className="flex items-center justify-center h-screen">
-              <LoadingSpinner variant="bars" />
-            </div>
-          }
+        <ClerkProvider
+          appearance={{
+            baseTheme: dark,
+            elements: {
+              footer: {
+                display: "none",
+              },
+            },
+            layout: {
+              unsafe_disableDevelopmentModeWarnings: true,
+            },
+          }}
         >
-          <main className="flex flex-col relative">
-            <Providers>{children}</Providers>
-            <Toaster richColors />
-          </main>
-        </Suspense>
+          <ClerkLoading>
+            <div className="flex items-center justify-center h-screen">
+              <LoadingSpinner variant="infinite" />
+            </div>
+          </ClerkLoading>
+          <ClerkLoaded>
+            <Suspense
+              fallback={
+                <div className="flex items-center justify-center h-screen">
+                  <LoadingSpinner variant="bars" />
+                </div>
+              }
+            >
+              <main className="flex flex-col relative">
+                <Providers>{children}</Providers>
+                <Toaster richColors />
+              </main>
+            </Suspense>
+          </ClerkLoaded>
+        </ClerkProvider>
       </body>
     </html>
   );
