@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata, Viewport } from "next";
 import { Roboto } from "next/font/google";
-import { LoadingSpinner, Providers } from "@/components";
+import { ConvexClientProvider, LoadingSpinner, Providers } from "@/components";
 
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
@@ -61,39 +61,41 @@ export default function RootLayout({
         <link rel="manifest" href="/favicon/site.webmanifest" />
       </head>
       <body className={cn(roboto.className, "antialiased")}>
-        <ClerkProvider
-          appearance={{
-            baseTheme: dark,
-            elements: {
-              footer: {
-                display: "none",
+        <ConvexClientProvider>
+          <ClerkProvider
+            appearance={{
+              baseTheme: dark,
+              elements: {
+                footer: {
+                  display: "none",
+                },
               },
-            },
-            layout: {
-              unsafe_disableDevelopmentModeWarnings: true,
-            },
-          }}
-        >
-          <ClerkLoading>
-            <div className="flex items-center justify-center h-screen">
-              <LoadingSpinner variant="infinite" />
-            </div>
-          </ClerkLoading>
-          <ClerkLoaded>
-            <Suspense
-              fallback={
-                <div className="flex items-center justify-center h-screen">
-                  <LoadingSpinner variant="bars" />
-                </div>
-              }
-            >
-              <main className="flex flex-col relative">
-                <Providers>{children}</Providers>
-                <Toaster richColors />
-              </main>
-            </Suspense>
-          </ClerkLoaded>
-        </ClerkProvider>
+              layout: {
+                unsafe_disableDevelopmentModeWarnings: true,
+              },
+            }}
+          >
+            <ClerkLoading>
+              <div className="flex items-center justify-center h-screen">
+                <LoadingSpinner variant="infinite" />
+              </div>
+            </ClerkLoading>
+            <ClerkLoaded>
+              <Suspense
+                fallback={
+                  <div className="flex items-center justify-center h-screen">
+                    <LoadingSpinner variant="bars" />
+                  </div>
+                }
+              >
+                <main className="flex flex-col relative">
+                  <Providers>{children}</Providers>
+                  <Toaster richColors />
+                </main>
+              </Suspense>
+            </ClerkLoaded>
+          </ClerkProvider>
+        </ConvexClientProvider>
       </body>
     </html>
   );

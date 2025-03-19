@@ -10,14 +10,9 @@ const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
-    DATABASE_URL: z
-      .string()
-      .url()
-      .refine((url) => url.startsWith("postgresql://"), {
-        message: "DATABASE_URL must be a PostgreSQL URL",
-      }),
     PORT: z.coerce.number().default(3000).optional(),
     CLERK_SECRET_KEY: z.string().min(1),
+    CONVEX_DEPLOYMENT: z.string().min(1),
   },
 
   /**
@@ -30,6 +25,7 @@ const env = createEnv({
     NEXT_PUBLIC_APP_URL: z.string(),
     NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.string().min(1),
     NEXT_PUBLIC_CLERK_SIGN_UP_URL: z.string().min(1),
+    NEXT_PUBLIC_CONVEX_URL: z.string().min(1),
   },
 
   /**
@@ -38,7 +34,6 @@ const env = createEnv({
    */
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
-    DATABASE_URL: process.env.DATABASE_URL,
     PORT: process.env.PORT,
     CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
@@ -46,6 +41,8 @@ const env = createEnv({
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     NEXT_PUBLIC_CLERK_SIGN_IN_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL,
     NEXT_PUBLIC_CLERK_SIGN_UP_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL,
+    NEXT_PUBLIC_CONVEX_URL: process.env.NEXT_PUBLIC_CONVEX_URL,
+    CONVEX_DEPLOYMENT: process.env.CONVEX_DEPLOYMENT,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
