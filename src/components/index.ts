@@ -10,6 +10,7 @@ import JoinQueue from "./join-queue";
 import Navbar from "./navbar";
 import PurchaseTicket from "./purchase-ticket";
 import ReleaseTicket from "./release-ticket";
+import SellerDashboard from "./sellet-dashboard";
 
 export {
   AnimationContainer,
@@ -24,4 +25,5 @@ export {
   Providers,
   PurchaseTicket,
   ReleaseTicket,
+  SellerDashboard,
 };

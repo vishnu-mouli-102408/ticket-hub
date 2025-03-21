@@ -1,7 +1,35 @@
 import type { UserJSON } from "@clerk/backend";
 import { v, type Validator } from "convex/values";
 
-import { internalMutation, query } from "./_generated/server";
+import { internalMutation, mutation, query } from "./_generated/server";
+
+export const getUsersStripeConnectId = query({
+  args: { userId: v.string() },
+  handler: async (ctx, args) => {
+    const user = await ctx.db
+      .query("users")
+      .filter((q) => q.eq(q.field("userId"), args.userId))
+      .filter((q) => q.neq(q.field("stripeConnectId"), undefined))
+      .first();
+    return user?.stripeConnectId;
+  },
+});
+
+export const updateOrCreateUserStripeConnectId = mutation({
+  args: { userId: v.string(), stripeConnectId: v.string() },
+  handler: async (ctx, args) => {
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_user_id", (q) => q.eq("userId", args.userId))
+      .first();
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    await ctx.db.patch(user._id, { stripeConnectId: args.stripeConnectId });
+  },
+});
 
 export const getUsers = query({
   args: {},
