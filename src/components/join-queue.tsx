@@ -63,7 +63,11 @@ export default function JoinQueue({
   };
 
   if (queuePosition === undefined || availability === undefined || !event) {
-    return <LoadingSpinner variant="circle" />;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <LoadingSpinner variant="circle" />
+      </div>
+    );
   }
 
   if (userTicket) {

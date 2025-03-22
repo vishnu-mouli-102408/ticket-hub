@@ -120,7 +120,10 @@ export default function EventCard({ eventId }: { eventId: Id<"events"> }) {
             </span>
           </div>
           <button
-            onClick={() => router.push(`/tickets/${userTicket._id}`)}
+            onClick={(e) => {
+              e?.stopPropagation();
+              router.push(`/tickets/${userTicket._id}`);
+            }}
             className="text-sm cursor-pointer bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-full font-medium shadow-sm transition-colors duration-200 flex items-center gap-1"
           >
             View your ticket

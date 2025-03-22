@@ -14,6 +14,8 @@ import PurchaseTicket from "./purchase-ticket";
 import ReleaseTicket from "./release-ticket";
 import SellerEventList from "./seller-events-list";
 import SellerDashboard from "./sellet-dashboard";
+import Ticket from "./ticket";
+import TicketCard from "./ticket-card";
 
 export {
   AnimationContainer,
@@ -32,4 +34,6 @@ export {
   ReleaseTicket,
   SellerDashboard,
   SellerEventList,
+  Ticket,
+  TicketCard,
 };
