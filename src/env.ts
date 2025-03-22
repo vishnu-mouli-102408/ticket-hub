@@ -16,6 +16,7 @@ const env = createEnv({
     CLERK_WEBHOOK_SECRET: z.string().min(1),
     STRIPE_SECRET_KEY: z.string().min(1),
     VERCEL_PROJECT_PRODUCTION_URL: z.string().min(1),
+    STRIPE_WEBHOOK_SECRET: z.string().min(1),
   },
 
   /**
@@ -49,6 +50,7 @@ const env = createEnv({
     CLERK_WEBHOOK_SECRET: process.env.CLERK_WEBHOOK_SECRET,
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     VERCEL_PROJECT_PRODUCTION_URL: process.env.VERCEL_PROJECT_PRODUCTION_URL,
+    STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

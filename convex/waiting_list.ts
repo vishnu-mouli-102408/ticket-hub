@@ -81,7 +81,7 @@ export const getQueuePosition = query({
  * Checks current availability considering purchased tickets and active offers.
  */
 
-async function processQueueX(ctx: MutationCtx, eventId: Id<"events">) {
+export async function processQueueX(ctx: MutationCtx, eventId: Id<"events">) {
   const event = await ctx.db.get(eventId);
   if (!event) throw new Error("Event not found");
 
