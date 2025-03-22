@@ -3,6 +3,7 @@
 // import { createStripeCheckoutSession } from "@/app/actions/createStripeCheckoutSession";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { createStripeCheckoutSession } from "@/actions/create-stripe-checkout-session";
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
 import { Ticket } from "lucide-react";
@@ -55,20 +56,20 @@ export default function PurchaseTicket({ eventId }: { eventId: Id<"events"> }) {
   const handlePurchase = async () => {
     if (!user) return;
 
-    // try {
-    //   setIsLoading(true);
-    //   const { sessionUrl } = await createStripeCheckoutSession({
-    //     eventId,
-    //   });
+    try {
+      setIsLoading(true);
+      const { sessionUrl } = await createStripeCheckoutSession({
+        eventId,
+      });
 
-    //   if (sessionUrl) {
-    //     router.push(sessionUrl);
-    //   }
-    // } catch (error) {
-    //   console.error("Error creating checkout session:", error);
-    // } finally {
-    //   setIsLoading(false);
-    // }
+      if (sessionUrl) {
+        router.push(sessionUrl);
+      }
+    } catch (error) {
+      console.error("Error creating checkout session:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (!user || !queuePosition || queuePosition.status !== "offered") {
